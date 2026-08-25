@@ -5,18 +5,8 @@
         "done": true
     },
     {
-        "id": 2,
-        "task": "Build to-do list",
-        "done": false
-    },
-    {
         "id": 3,
         "task": "sadf",
         "done": true
-    },
-    {
-        "id": 4,
-        "task": "sdf",
-        "done": false
     }
 ]

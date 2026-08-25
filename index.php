@@ -28,7 +28,7 @@ if (isset($_GET['toggle'])) {
 }
 
 //==========Delete =============
-if (isset($_DELETE['delete'])) {
+if (isset($_GET['delete'])) {
   $tasks = getTasks($filePath);
   $tasks = deleteTask($tasks, (int) $_GET['delete']);
   saveTasks($filePath, $tasks);

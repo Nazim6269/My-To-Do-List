@@ -40,7 +40,7 @@ function renderedTaskList(array $tasks): string
 
     $html .= '<li class="' . $status . '">';
 
-    $html .= '<a href="index.php?toggle= ' . $task['id'] . '">' . $label . '</a>';
+    $html .= '<a href="index.php?toggle=' . $task['id'] . '">' . $label . '</a>';
 
     $html .= htmlspecialchars($task['task']);
 
