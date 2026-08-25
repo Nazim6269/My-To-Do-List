@@ -16,7 +16,7 @@ $tasks = getTasks($filePath);
 <body>
 
   <h1>My To Do List</h1>
-  <pre> <?php print_r($tasks); ?> </pre>
+  <pre> <?php echo renderedTaskList($tasks) ?> </pre>
 </body>
 
 

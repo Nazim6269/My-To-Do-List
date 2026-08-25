@@ -23,3 +23,27 @@ function getTasks(string $filePath): array
 
   return $tasks;
 }
+
+
+function renderedTaskList(array $tasks): string
+{
+
+  if (empty($tasks)) {
+    return '<p> Not Task Yet. Add one above';
+  }
+
+  $html = '<ul>';
+
+  foreach ($tasks as $task) {
+    $status = $task['done'] ? 'done' : 'pending';
+    $checkbox = $task['done'] ? 'checked' : '';
+
+    $html .= '<li class="' . $status . '">';
+    $html .= '<input type="checkbox" disabled ' . $checkbox . '> ';
+    $html .= htmlspecialchars($task['task']);
+    $html .= '</li>';
+  }
+
+  $html .= '</ul>';
+  return $html;
+}
