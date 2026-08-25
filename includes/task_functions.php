@@ -47,3 +47,31 @@ function renderedTaskList(array $tasks): string
   $html .= '</ul>';
   return $html;
 }
+
+
+function saveTasks(string $filePath, array $tasks): bool
+{
+  $jsonContent = json_encode($tasks, JSON_PRETTY_PRINT);
+
+
+  if ($jsonContent == false) {
+    return false;
+  }
+
+  return file_put_contents($filePath, $jsonContent) !== false;
+}
+
+
+function addTask(array $tasks, string $taskText): array
+{
+
+  $newId = empty($tasks) ? 1 : max(array_column($tasks, 'id')) + 1;
+
+  $tasks[] = [
+    'id' => $newId,
+    'task' => $taskText,
+    'done' => false,
+  ];
+
+  return $tasks;
+}
