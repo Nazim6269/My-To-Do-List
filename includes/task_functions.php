@@ -1,6 +1,6 @@
 <?php
 
-
+//============== Task List ==========
 function getTasks(string $filePath): array
 {
 
@@ -24,7 +24,7 @@ function getTasks(string $filePath): array
   return $tasks;
 }
 
-
+//========= render list =============
 function renderedTaskList(array $tasks): string
 {
 
@@ -36,10 +36,12 @@ function renderedTaskList(array $tasks): string
 
   foreach ($tasks as $task) {
     $status = $task['done'] ? 'done' : 'pending';
-    $checkbox = $task['done'] ? 'checked' : '';
+    $label  = $task['done'] ? '☑' : '☐';
 
     $html .= '<li class="' . $status . '">';
-    $html .= '<input type="checkbox" disabled ' . $checkbox . '> ';
+
+    $html .= '<a href="index.php?toggle= ' . $task['id'] . '">' . $label . '</a>';
+
     $html .= htmlspecialchars($task['task']);
     $html .= '</li>';
   }
@@ -49,6 +51,7 @@ function renderedTaskList(array $tasks): string
 }
 
 
+//============== Save Task==============
 function saveTasks(string $filePath, array $tasks): bool
 {
   $jsonContent = json_encode($tasks, JSON_PRETTY_PRINT);
@@ -62,6 +65,7 @@ function saveTasks(string $filePath, array $tasks): bool
 }
 
 
+//============= add Task =================
 function addTask(array $tasks, string $taskText): array
 {
 
@@ -72,6 +76,24 @@ function addTask(array $tasks, string $taskText): array
     'task' => $taskText,
     'done' => false,
   ];
+
+  return $tasks;
+}
+
+//============= Toggle Task Status ===========
+
+function toggleTaskStatus(array $tasks, int $taskId): array
+{
+
+  foreach ($tasks as &$task) {
+    if ($task['id'] == $taskId) {
+      $task['done'] = !$task['done'];
+
+      break;
+    }
+  }
+
+  unset($task);
 
   return $tasks;
 }

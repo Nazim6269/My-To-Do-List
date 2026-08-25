@@ -16,6 +16,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['task'])) {
 }
 
 
+if (isset($_GET['toggle'])) {
+  $task = getTasks($filePath);
+  $task = toggleTaskStatus($task, (int) $_GET['toggle']);
+
+  saveTasks($filePath, $task);
+
+  header('Location: index.php');
+
+  exit;
+}
+
 $tasks = getTasks($filePath);
 
 ?>
@@ -25,6 +36,12 @@ $tasks = getTasks($filePath);
 
 <head>
   <title>To DO List</title>
+  <style>
+    .done {
+      text-decoration: line-through;
+      color: gray;
+    }
+  </style>
 </head>
 
 <body>
