@@ -43,6 +43,8 @@ function renderedTaskList(array $tasks): string
     $html .= '<a href="index.php?toggle= ' . $task['id'] . '">' . $label . '</a>';
 
     $html .= htmlspecialchars($task['task']);
+
+    $html .= ' <a href="index.php?delete=' . $task['id'] . '" onclick="return confirm(\'Delete this task?\')">✕</a>';
     $html .= '</li>';
   }
 
@@ -96,4 +98,15 @@ function toggleTaskStatus(array $tasks, int $taskId): array
   unset($task);
 
   return $tasks;
+}
+
+//=========== Delete Task ============
+function deleteTask(array $tasks, int $taskId): array
+{
+
+  $tasks = array_filter($tasks, function ($task) use ($taskId) {
+    return $task['id'] !== $taskId;
+  });
+
+  return array_values($tasks);
 }

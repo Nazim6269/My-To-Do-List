@@ -3,7 +3,7 @@ require_once 'includes/task_functions.php';
 
 $filePath = 'data/task.json';
 
-
+//=====POST========
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['task'])) {
 
   $tasks = getTasks($filePath);
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['task'])) {
   exit;
 }
 
-
+//======= GET ========
 if (isset($_GET['toggle'])) {
   $task = getTasks($filePath);
   $task = toggleTaskStatus($task, (int) $_GET['toggle']);
@@ -24,6 +24,16 @@ if (isset($_GET['toggle'])) {
 
   header('Location: index.php');
 
+  exit;
+}
+
+//==========Delete =============
+if (isset($_DELETE['delete'])) {
+  $tasks = getTasks($filePath);
+  $tasks = deleteTask($tasks, (int) $_GET['delete']);
+  saveTasks($filePath, $tasks);
+
+  header('Location: index.php');
   exit;
 }
 
