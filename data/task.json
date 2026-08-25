@@ -1,1 +1,4 @@
-[]
+[
+    {"id": 1, "task": "Learn PHP basics", "done": false},
+    {"id": 2, "task": "Build to-do list", "done": true}
+]
